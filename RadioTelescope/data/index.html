@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>NETRACKER</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="shortcut icon" type="image/png" href="netracker.ico"/>
+</head>
+
+<body>
+	<header>
+		<h2>NETRACKER</h2>
+	</header>
+
+
+	<button class="tablink" onclick="openPage('Application', this, '#78fd78')">Application Settings</button>
+	<button class="tablink" onclick="openPage('Main', this, '#78fd78')" id="defaultOpen">Home</button>
+	<button class="tablink" onclick="openPage('System', this, '#78fd78')">System Settings</button>
+
+
+	<div id="Application" class="tabcontent">
+		<h3>Application Settings</h3>
+		<p>Device working direction</p>
+		<form action="Save">
+			<input type="radio" id="A" name="Mode" value="1" checked>
+			<label for="A" style="color:#878787">Station Mode if the device cannot find it, it switches to AP
+				Mode.</label><br>
+			<input type="radio" id="B" name="Mode" value="2">
+			<label for="B" style="color:#878787">Just AP Mode</label><br><br><br>
+			<input type="submit" value="Save">
+		</form>
+	</div>
+
+
+
+
+	<div id="Main" class="tabcontent" style="text-align: center;">
+		<h3>Home</h3>
+		<p></p>
+		<p>
+			<div id="pressure">
+				<svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66">
+					<circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30">
+					</circle>
+				</svg>
+			</div>
+		</p>
+	</div>
+
+
+
+
+
+	<div id="System" class="tabcontent">
+		<h3>System Settings</h3>
+		<form name="WIFI"  action="Save">
+			<input type="radio" id="A" name="Mode" value="1" checked>
+			<label for="A" style="color:#878787">Station Mode if the device cannot find it, it switches to AP
+				Mode.</label><br>
+			<input type="radio" id="B" name="Mode" value="2">
+			<label for="B" style="color:#878787">Just AP Mode</label><br><br><br>
+
+
+			<label for="SSID" style="color: #878787" ;>SSID:</label><br>
+			<select id="SSID" name="SSID">
+
+			</select><br>
+
+			<label for="lname" style="color: #878787" ;><br>Password:</label><br>
+			<input type="text" id="passwd" name="passwd" onfocus="this.value=''" value="************"><br><br>
+			<input type="submit" value="Save">
+		</form>
+		<button onclick="setupWifiList()">Reflesh</button>
+		<br><br>
+			<label id="resset" style="color: #878787" ;>System Reboot:</label>
+			<button onclick="reset()">System Reboot</button>
+		<br><br>
+	
+
+		<form action="fReset">
+			<label for="fname" style="color: #878787" ;>Factory Reset:</label>
+			<input type="submit" value="Factory Reset">
+		</form>
+
+
+	</div>
+	<footer>
+		<p>Author by; Furkan Parlak</p>
+	</footer>
+
+
+
+	<script src="script.js"></script>
+</body>
+
+</html>

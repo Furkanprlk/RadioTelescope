@@ -1,0 +1,322 @@
+/**
+  ESP8266 - Basic HTTP server with multiple pages from SPIFFS
+  v. 1.0
+  Copyright (C) 2019 Robert Ulbricht
+  https://www.arduinoslovakia.eu
+
+  IDE: 1.8.6 or higher
+  Board: NodeMCU 0.9 (ESP-12)
+  Core: https://github.com/esp8266/Arduino
+  Version: 2.5.0
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+#include <ArduinoJson.h>
+#include <FS.h>
+
+#include "ESP8266Essentials.h"
+
+const char* ssid = "SUPERONLINE_WiFi_2791";  // Enter SSID here
+const char* password = "RV7CUUPTJTFC";  //Enter Password here
+
+const char* tempssid;
+const char* temppassword;
+
+const char* APssid = "NeTracker";  // Enter SSID here
+const char* APpassword = "1234567890";
+
+IPAddress ip(192, 168, 1, 220);
+
+
+int aad = 0;                    //Kullanılıyor
+int xmode = 1;                  //Kullanılıyor
+bool sys = 0;                   //Kullanılıyor
+int motors[2] = {0, 0};         //Kullanılıyor
+bool directions[2] = {0, 0};    //Kullanılıyor
+int zaz=0;                      //Kullanılıyor
+float cord[2]= {0,0};           //Kullanılıyor
+
+int Step[2] = {0, 5}; //GPIO0---D3 of Nodemcu--Step of stepper motor driver
+int Dir[2]  = {2, 4}; //GPIO2---D4 of Nodemcu--Direction of stepper motor driver
+
+
+ESP8266WebServer server(80);
+
+
+void homme() {
+  String message = "<html>";
+  message += "<body>";
+  message += "<progress id=\"file\" max=\"100\" value=\"";
+  message += aad;
+  message += "\"></progress>";
+  message += "<br><br><label id=\"starrt\" style=\"color: #878787\";>System Start:</label>";
+  message += "<button onclick=\"starrt()\">Start</button>";
+  message += "<p>X=" + String(cord[0]) + " - Y=" + String(cord[1]) + "</p>";
+  message += "</body>";
+  message += "</html>";
+  Serial.print("HOME ");
+  server.send(200, "text/html", message);
+}
+void starrt() {
+  sys = !sys;
+}
+void scan() {
+  int Tnetwork = 0, i = 0, len = 0;
+  Tnetwork = WiFi.scanNetworks();//Scan for total networks available
+  String s = "{\"wifiList\":[";
+  for (int i = 0; i < Tnetwork; ++i)
+  {
+    //Serial.println(String(WiFi.SSID(i)));
+    s += "\"" + String(WiFi.SSID(i)) + "\",";
+  }
+  s = s.substring(0, s.length() - 1);
+  s +=  "]}";
+
+  //Serial.println(s);
+  File file = SPIFFS.open("/data.json", "w");
+  if (!file) {
+    Serial.println("Error opening file for writing");
+    return;
+  }
+
+  file.print(s);
+  file.close();
+  /*
+    //StaticJsonBuffer<500> jsonBuffer;
+    //JsonObject& root = jsonBuffer.createObject();
+    DynamicJsonDocument doc(1024);
+    deserializeJson(doc, s);
+    JsonObject& obj = doc.as<JsonObject>();
+    Serial.println("Save History");
+    File historyFile = SPIFFS.open("/data.json", "w");
+    obj.printTo("/data.json");
+    historyFile.close();*/
+}
+void readJSON(String path) {
+  File file2 = SPIFFS.open(path, "r");
+
+  if (!file2) {
+    Serial.println("Failed to open " + path + " for reading");
+    return;
+  }
+  Serial.println("");
+  Serial.println(path + " Content:");
+  while (file2.available()) {
+    Serial.write(file2.read());
+  }
+  file2.close();
+}
+void datajson() {
+  scan();
+  File file2 = SPIFFS.open("/data.json", "r");
+
+  if (!file2) {
+    Serial.println("Failed to open data.json for reading");
+    return;
+  }
+
+  //Serial.println("JSON Content:");
+  String kk = "";
+  while (file2.available()) {
+
+    kk += char(file2.read());
+
+  }
+  server.send(200, "text/html", kk);
+  file2.close();
+
+}
+
+
+void systemSave() {
+  ssid = string2char(server.arg("SSID"));
+  password = string2char(server.arg("passwd"));
+
+  Serial.println(server.arg("SSID"));
+  Serial.println(server.arg("passwd"));
+  Serial.println(server.arg("Mode"));
+
+  File file = SPIFFS.open("/tempssid.txt", "w");
+  if (!file) {
+    Serial.println("Error opening file for writing");
+  }
+  else {
+    String s = server.arg("SSID") + "|" + server.arg("passwd") + "|" + server.arg("Mode");
+    file.print(s);
+    file.close();
+  }
+
+  String mgds = "<html><head><meta http-equiv=\"refresh\" content=\"0;URL=http://";
+  mgds += ip2Str(WiFi.localIP());
+  mgds += "/index.html\"></head></html>";
+  server.send(200, "text/html", mgds);
+}
+void sistemGiris() {
+  String s1, s2;
+  File file = SPIFFS.open("/ssid.txt", "r");
+  if (!file) {
+    Serial.println("ssid.txt açılamadı");
+  } else {
+    s1 = file.readStringUntil('|');
+    s2 = file.readStringUntil('|');
+    xmode = ((int)file.read()) - 48;
+
+    ssid = (char*)s1.c_str();
+    password = (char*)s2.c_str();
+  }
+  file.close();
+
+  File tfile = SPIFFS.open("/tempssid.txt", "r");
+  if (!tfile) {
+    Serial.println("tempssid.txt açılamadı");
+  } else {
+    s1 = tfile.readStringUntil('|');
+    s2 = tfile.readStringUntil('|');
+    xmode = ((int)tfile.read()) - 48;
+
+    tempssid = (char*)s1.c_str();
+    temppassword = (char*)s2.c_str();
+  }
+  tfile.close();
+
+  Serial.println();
+  Serial.print("RSSID= ");
+  Serial.println(ssid);
+  Serial.print("RPassword= ");
+  Serial.println(password);
+  Serial.print("Rmode= ");
+  Serial.println(xmode);
+
+  if (!xmode) wifiStarting(0, APssid, APpassword, ip);
+  else if (!wifiStarting(1, tempssid, temppassword, ip, 10))
+    if (!wifiStarting(1, ssid, password, ip, 10))
+      wifiStarting(0, APssid, APpassword, ip);
+}
+void sysReset() {
+  server.sendHeader("Location", "/index.html");
+  server.send(301);
+  Serial.println("Reset..");
+  ESP.restart();
+}
+void setup(void) {
+  Serial.begin(115200);
+  SPIFFS.begin();
+  sistemGiris();
+
+  //readJSON("/ssid.txt");
+
+
+
+
+  Serial.println("");
+  Serial.print("Connected to ");
+  Serial.println(ssid);
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+  pinMode(Step[0], OUTPUT); //Step pin as output
+  pinMode(Dir[0],  OUTPUT); //Direcction pin as output
+  digitalWrite(Step[0], LOW); // Currently no stepper motor movement
+  digitalWrite(Dir[0], LOW);
+  pinMode(Step[1], OUTPUT); //Step pin as output
+  pinMode(Dir[1],  OUTPUT); //Direcction pin as output
+  digitalWrite(Step[1], LOW); // Currently no stepper motor movement
+  digitalWrite(Dir[1], LOW);
+
+  server.on("/home", homme);
+  server.on("/data.json", datajson);
+  server.on("/Save", systemSave);
+  server.on("/sReset", sysReset);
+  server.on("/starrt", starrt);
+
+  scan();
+
+  //readJSON("/data.json"); //json içini görmek için kullandık
+
+  server.serveStatic("/", SPIFFS, "/netflis.html");
+  server.serveStatic("/index.html", SPIFFS, "/index.html");
+  server.serveStatic("/netflis.css", SPIFFS, "/netflis.css");
+  server.serveStatic("/style.css", SPIFFS, "/style.css");
+  server.serveStatic("/script.js", SPIFFS, "/script.js");
+  server.serveStatic("/netracker.ico", SPIFFS, "/netracker.ico");
+  //server.serveStatic("/data.json", SPIFFS, "/data.json");
+
+
+  server.begin();
+  Serial.println("HTTP server started");
+}
+void motor(bool cc) {
+  if (cc) {
+    Serial.println("Girdim");
+    if(zaz==0){
+      if (motors[0] < 1800) {
+      don(0, 0);
+      motors[0]++;
+      cord[0] += 0.1;
+      }else{ zaz++; motors[0] = 0;}
+    }if(zaz==1){
+      if (motors[0] < 100) {
+      don(1, 0);
+      motors[0]++;
+      cord[1] += 0.1;
+      }else{ zaz++; motors[0] = 0;}
+    }
+    if(zaz==2){
+      if (motors[0] < 1800) {
+      don(0, 1);
+      motors[0]++;
+      cord[0] -= 0.1;
+      }else{ zaz++; motors[0] = 0;}
+    }
+    if(zaz==3){
+      if (motors[0] < 100) {
+      don(1, 0);
+      motors[0]++;
+      cord[1] += 0.1;
+      }else{ zaz=0; motors[0] = 0; aad++;}
+    }
+    
+/*
+    if (motors[0] < 1800) {
+      don(0, zaz);
+      motors[0]++;
+    } else {
+      if (motors[1] < 1800) {
+        don(1, 0);
+        motors[1]++;
+      }else if (motors[0] < 3600){
+        don(0, zaz);
+        motors[0]++;
+      }else{
+        motors[0]=0;
+        motors[1]=0;
+        zaz = !zaz;
+      }
+    }
+  }
+  */
+}}
+  void don(bool mot, bool yon) {
+    digitalWrite(Dir[mot], yon); //Rotate stepper motor in clock wise direction
+    digitalWrite(Step[mot], HIGH);
+    delay(2);
+    digitalWrite(Step[mot], LOW);
+    delay(2);
+  }
+  void loop(void) {
+    server.handleClient();
+    motor(sys);
+  }

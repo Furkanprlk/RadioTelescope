@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    color: white;
+    font-family: "Arial", sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .container {
+    margin: 20px auto;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+    width: 500px;
+  }
+  
+  .logo {
+    position: relative;
+    width: 360px;
+    height: 520px;
+    -webkit-animation: 4s fadein;
+            animation: 4s fadein;
+  }
+  .logo .uno, .logo .dos, .logo .tres {
+    position: absolute;
+    width: 120px;
+    height: 100%;
+    background: #78fd78;
+  }
+  .logo .uno {
+    left: 0;
+  }
+  .logo .dos {
+    background: #78fd78;
+    left: 0;
+    z-index: 1;
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    -webkit-transform: skewX(25.4deg);
+            transform: skewX(25.4deg);
+    box-shadow: 0 0 20px black;
+  }
+  .logo .tres {
+    right: 0;
+  }
+  .logo::before {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    z-index: 10;
+    width: 120%;
+    height: 30px;
+    background: black;
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+  }
+  
+  .name {
+    text-transform: uppercase;
+    letter-spacing: 15px;
+    -webkit-animation: 4s name linear;
+            animation: 4s name linear;
+  }
+  
+  @-webkit-keyframes fadein {
+    0% {
+      opacity: 0;
+      -webkit-transform: scale(0.8);
+              transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+      -webkit-transform: scale(0.8);
+              transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @-webkit-keyframes name {
+    0% {
+      opacity: 0;
+      -webkit-transform: scale(0.8);
+              transform: scale(0.8);
+    }
+    80% {
+      opacity: 0;
+      -webkit-transform: scale(0.8);
+              transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes name {
+    0% {
+      opacity: 0;
+      -webkit-transform: scale(0.8);
+              transform: scale(0.8);
+    }
+    80% {
+      opacity: 0;
+      -webkit-transform: scale(0.8);
+              transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
