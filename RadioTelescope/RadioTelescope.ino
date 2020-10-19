@@ -30,7 +30,7 @@
 
 #include "ESP8266Essentials.h"
 
-const char* ssid = "SUPERONLINE_WiFi_2791";  // Enter SSID here
+const char* ssid = "Furkan Parlak";  // Enter SSID here
 const char* password = "RV7CUUPTJTFC";  //Enter Password here
 
 const char* tempssid;
