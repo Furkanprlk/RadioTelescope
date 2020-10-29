@@ -18,25 +18,18 @@
 
 	<button class="tablink" onclick="openPage('Application', this, '#78fd78')">Manual</button>
 	<button class="tablink" onclick="openPage('Main', this, '#78fd78')" id="defaultOpen">Automatic</button>
-	<button class="tablink" onclick="openPage('System', this, '#78fd78')">System Settings</button>
+	<button class="tablink" onclick="openPage('System', this, '#78fd78')">Settings</button>
 
 
-	<div id="Application" class="tabcontent">
+	<div id="Application" class="tabcontent" style="text-align: center;">
 		<h3>Manual</h3>
-		<p></p>
+		<p><button onclick="starrt()">.Up.</button></p>
+		<p><button onclick="starrt()">Up</button></p>
 		<p>
-			
+			<button onclick="starrt()"><<|</button><button onclick="starrt()"><|</button> Control <button onclick="starrt()">|></button><button onclick="starrt()">|>></button>
 		</p>
-		<h3>Application Settings</h3>
-		<p>Device working direction</p>
-		<form action="Save">
-			<input type="radio" id="A" name="Mode" value="1" checked>
-			<label for="A" style="color:#878787">Station Mode if the device cannot find it, it switches to APddd
-				Mode.</label><br>
-			<input type="radio" id="B" name="Mode" value="2">
-			<label for="B" style="color:#878787">Just AP Mode</label><br><br><br>
-			<input type="submit" value="Save">
-		</form>
+		<p><button onclick="starrt()">Down</button></p>
+		<p><button onclick="starrt()">.Down.</button></p>
 	</div>
 
 
@@ -60,6 +53,16 @@
 
 
 	<div id="System" class="tabcontent">
+	<h3>Application Settings</h3>
+	<p>Device working direction</p>
+	<form action="Save">
+		<input type="radio" id="A" name="Mode" value="1" checked>
+		<label for="A" style="color:#878787">Station Mode if the device cannot find it, it switches to APddd
+			Mode.</label><br>
+		<input type="radio" id="B" name="Mode" value="2">
+		<label for="B" style="color:#878787">Just AP Mode</label><br><br><br>
+		<input type="submit" value="Save">
+	</form>
 		<h3>System Settings</h3>
 		<form name="WIFI"  action="Save">
 			<input type="radio" id="A" name="Mode" value="1" checked>

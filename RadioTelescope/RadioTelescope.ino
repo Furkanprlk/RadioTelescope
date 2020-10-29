@@ -258,6 +258,7 @@ void setup(void) {
   server.begin();
   Serial.println("HTTP server started");
 }
+/*
 void motor(bool cc) {
   if (cc) {
     Serial.println("Girdim");
@@ -307,16 +308,16 @@ void motor(bool cc) {
       }
     }
   }
-  */
 }}
-  void don(bool mot, bool yon) {
+*/
+  void don(bool mot, bool yon,int mspeed) {
     digitalWrite(Dir[mot], yon); //Rotate stepper motor in clock wise direction
     digitalWrite(Step[mot], HIGH);
-    delay(10);
+    delay(mspeed);
     digitalWrite(Step[mot], LOW);
-    delay(10);
+    delay(mspeed);
   }
   void loop(void) {
     server.handleClient();
-    motor(sys);
+//    motor(sys);
   }
