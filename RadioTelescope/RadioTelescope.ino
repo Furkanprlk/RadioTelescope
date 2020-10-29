@@ -312,9 +312,9 @@ void motor(bool cc) {
   void don(bool mot, bool yon) {
     digitalWrite(Dir[mot], yon); //Rotate stepper motor in clock wise direction
     digitalWrite(Step[mot], HIGH);
-    delay(2);
+    delay(10);
     digitalWrite(Step[mot], LOW);
-    delay(2);
+    delay(10);
   }
   void loop(void) {
     server.handleClient();

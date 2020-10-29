@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="shortcut icon" type="image/png" href="netracker.ico"/>
+
 </head>
 
 <body>
@@ -15,12 +16,17 @@
 	</header>
 
 
-	<button class="tablink" onclick="openPage('Application', this, '#78fd78')">Application Settings</button>
-	<button class="tablink" onclick="openPage('Main', this, '#78fd78')" id="defaultOpen">Home</button>
+	<button class="tablink" onclick="openPage('Application', this, '#78fd78')">Manual</button>
+	<button class="tablink" onclick="openPage('Main', this, '#78fd78')" id="defaultOpen">Automatic</button>
 	<button class="tablink" onclick="openPage('System', this, '#78fd78')">System Settings</button>
 
 
 	<div id="Application" class="tabcontent">
+		<h3>Manual</h3>
+		<p></p>
+		<p>
+			
+		</p>
 		<h3>Application Settings</h3>
 		<p>Device working direction</p>
 		<form action="Save">
@@ -37,7 +43,7 @@
 
 
 	<div id="Main" class="tabcontent" style="text-align: center;">
-		<h3>Home</h3>
+		<h3>Automatic</h3>
 		<p></p>
 		<p>
 			<div id="pressure">
