@@ -73,6 +73,39 @@ void homme() {
 }
 void starrt() {
   sys = !sys;
+  Serial.print("Start ");
+}
+void left() {
+  Serial.print("left ");
+  for(int i=0; i<100; i++){
+      don(0, 1, 2);
+      motors[0]++;
+      cord[0] -= 0.1;
+      }
+}
+void leftt() {
+  Serial.print("leftt ");
+  for(int i=0; i<600; i++){
+      don(0, 1, 2);
+      motors[0]++;
+      cord[0] -= 0.1;
+      }
+}
+void right() {
+  Serial.print("right ");
+  for(int i=0; i<100; i++){
+      don(0, 0, 2);
+      motors[0]++;
+      cord[0] -= 0.1;
+      }
+}
+void rightt() {
+  Serial.print("rightt ");
+  for(int i=0; i<600; i++){
+      don(0, 0, 2);
+      motors[0]++;
+      cord[0] -= 0.1;
+      }
 }
 void scan() {
   int Tnetwork = 0, i = 0, len = 0;
@@ -241,6 +274,10 @@ void setup(void) {
   server.on("/Save", systemSave);
   server.on("/sReset", sysReset);
   server.on("/starrt", starrt);
+  server.on("/right", right);
+  server.on("/rightt", rightt);
+  server.on("/left", left);
+  server.on("/leftt", leftt);
 
   scan();
 
@@ -308,8 +345,10 @@ void motor(bool cc) {
       }
     }
   }
-}}
-*/
+  }}
+  */
+
+
   void don(bool mot, bool yon,int mspeed) {
     digitalWrite(Dir[mot], yon); //Rotate stepper motor in clock wise direction
     digitalWrite(Step[mot], HIGH);

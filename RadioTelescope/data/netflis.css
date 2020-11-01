@@ -1,8 +1,8 @@
-fbody {
+body {
     margin: 0;
     padding: 0;
     background: black;
-    color: white;
+    color: rgb(230, 0, 0);
     font-family: "Arial", sans-serif;
     font-size: 45px;
     font-weight: bold;
@@ -10,7 +10,7 @@ fbody {
   
   a {
     text-decoration: none;
-    color: white;
+    color: rgb(79, 236, 93);
   }
   
   .container {
