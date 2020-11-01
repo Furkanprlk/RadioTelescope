@@ -288,6 +288,7 @@ void setup(void) {
   server.serveStatic("/netflis.css", SPIFFS, "/netflis.css");
   server.serveStatic("/style.css", SPIFFS, "/style.css");
   server.serveStatic("/script.js", SPIFFS, "/script.js");
+  server.serveStatic("/jquery.js", SPIFFS, "/jquery.js");
   server.serveStatic("/netracker.ico", SPIFFS, "/netracker.ico");
   //server.serveStatic("/data.json", SPIFFS, "/data.json");
 
