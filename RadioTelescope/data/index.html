@@ -22,13 +22,13 @@
 
 	<div id="Application" class="tabcontent" style="text-align: center;">
 		<h3>Manual</h3>
-		<p><button onclick="upp()">.Up.</button></p>
-		<p><button onclick="up()">Up</button></p>
+		<p><button id='up'>Up</button></p>
 		<p>
-			<button onclick="leftt()"><<|</button><button onclick="left()"><|</button> Control <button onclick="right()">|></button><button onclick="rightt()">|>></button>
+			<button id='left'><=</button> Control <button id='right'>=></button>
 		</p>
-		<p><button onclick="down()">Down</button></p>
-		<p><button onclick="downn()">.Down.</button></p>
+		<p><button id='down'>Down</button></p>
+		<br>
+		<input type="range" min="2" max="30" value="30" class="slider" id="hiz" stlye='direction: rtl;'>
 	</div>
 
 
@@ -100,8 +100,8 @@
 
 
 
-	<script src="script.js"></script>
 	<script src="jquery.js"></script>
+	<script src="script.js"></script>
 </body>
 
 </html>

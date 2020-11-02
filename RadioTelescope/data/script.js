@@ -74,3 +74,109 @@ function starrt() {
   xhttp.open("GET", "/starrt", true);
   xhttp.send();
 }
+function down() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("down").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/down", true);
+  xhttp.send();
+}
+function downn() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("downn").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/downn", true);
+  xhttp.send();
+}
+
+$('#up').mousedown(function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "moveMotors?yon=0&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.send();
+});
+
+$('#down').mousedown(function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "moveMotors?yon=1&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.send();
+});
+
+$('#left').mousedown(function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "moveMotors?yon=2&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.send();
+});
+
+$('#right').mousedown(function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "moveMotors?yon=3&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.send();
+});
+
+
+$('#up').mouseup(function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "moveMotors?yon=5&hiz=0", true);
+  xhttp.send();
+});
+
+$('#down').mouseup(function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "moveMotors?yon=5&hiz=0", true);
+  xhttp.send();
+});
+
+$('#left').mouseup(function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "moveMotors?yon=5&hiz=0", true);
+  xhttp.send();
+});
+
+$('#right').mouseup(function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "moveMotors?yon=5&hiz=0", true);
+  xhttp.send();
+});
+
+
+$('#hiz').change(function (event) {
+  console.log();
+});

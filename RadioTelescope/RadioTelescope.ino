@@ -107,6 +107,32 @@ void rightt() {
       cord[0] -= 0.1;
       }
 }
+
+void moveMotors() 
+{ 
+  String yon = server.arg("yon");
+  String hiz = server.arg("hiz");
+  
+  Serial.println(yon+ ' ' + hiz);
+
+  if(yon.startsWith("0")){ //up
+    
+  }else if(yon.startsWith("1")){ //down
+    
+  }
+  else if(yon.startsWith("2")){ //left
+    
+  }
+  else if(yon.startsWith("3")){ //right
+    
+  }
+  else if(yon.startsWith("5")){ //stop
+     
+  }
+  
+  server.send(200, "text/plain"); //Send web page
+}
+
 void scan() {
   int Tnetwork = 0, i = 0, len = 0;
   Tnetwork = WiFi.scanNetworks();//Scan for total networks available
@@ -278,6 +304,7 @@ void setup(void) {
   server.on("/rightt", rightt);
   server.on("/left", left);
   server.on("/leftt", leftt);
+  server.on("/moveMotors", moveMotors);
 
   scan();
 
