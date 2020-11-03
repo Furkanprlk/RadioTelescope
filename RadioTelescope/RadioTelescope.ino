@@ -44,11 +44,11 @@ IPAddress ip(192, 168, 1, 220);
 
 int aad = 0;                    //Kullanılıyor
 int xmode = 1;                  //Kullanılıyor
-bool sys = 0;                   //Kullanılıyor
+int sys = 5;                   //Kullanılıyor
 int motors[2] = {0, 0};         //Kullanılıyor
 bool directions[2] = {0, 0};    //Kullanılıyor
-int zaz=0;                      //Kullanılıyor
-float cord[2]= {0,0};           //Kullanılıyor
+int zaz = 0;                    //Kullanılıyor
+float cord[2] = {0, 0};         //Kullanılıyor
 
 int Step[2] = {0, 5}; //GPIO0---D3 of Nodemcu--Step of stepper motor driver
 int Dir[2]  = {2, 4}; //GPIO2---D4 of Nodemcu--Direction of stepper motor driver
@@ -72,64 +72,67 @@ void homme() {
   server.send(200, "text/html", message);
 }
 void starrt() {
-  sys = !sys;
+  if (sys == 4)
+    sys = 5;
+  else if (sys == 5)
+    sys = 4;
   Serial.print("Start ");
 }
 void left() {
   Serial.print("left ");
-  for(int i=0; i<100; i++){
-      don(0, 1, 2);
-      motors[0]++;
-      cord[0] -= 0.1;
-      }
+  for (int i = 0; i < 100; i++) {
+    don(0, 1, 2);
+    motors[0]++;
+    cord[0] -= 0.1;
+  }
 }
 void leftt() {
   Serial.print("leftt ");
-  for(int i=0; i<600; i++){
-      don(0, 1, 2);
-      motors[0]++;
-      cord[0] -= 0.1;
-      }
+  for (int i = 0; i < 600; i++) {
+    don(0, 1, 2);
+    motors[0]++;
+    cord[0] -= 0.1;
+  }
 }
 void right() {
   Serial.print("right ");
-  for(int i=0; i<100; i++){
-      don(0, 0, 2);
-      motors[0]++;
-      cord[0] -= 0.1;
-      }
+  for (int i = 0; i < 100; i++) {
+    don(0, 0, 2);
+    motors[0]++;
+    cord[0] -= 0.1;
+  }
 }
 void rightt() {
   Serial.print("rightt ");
-  for(int i=0; i<600; i++){
-      don(0, 0, 2);
-      motors[0]++;
-      cord[0] -= 0.1;
-      }
+  for (int i = 0; i < 600; i++) {
+    don(0, 0, 2);
+    motors[0]++;
+    cord[0] -= 0.1;
+  }
 }
 
-void moveMotors() 
-{ 
+void moveMotors()
+{
   String yon = server.arg("yon");
   String hiz = server.arg("hiz");
-  
-  Serial.println(yon+ ' ' + hiz);
 
-  if(yon.startsWith("0")){ //up
-    
-  }else if(yon.startsWith("1")){ //down
-    
+  Serial.println(yon + ' ' + hiz);
+
+  if (yon.startsWith("0")) { //up
+
+  } else if (yon.startsWith("1")) { //down
+
   }
-  else if(yon.startsWith("2")){ //left
-    
+  else if (yon.startsWith("2")) { //left
+
   }
-  else if(yon.startsWith("3")){ //right
-    
+  else if (yon.startsWith("3")) { //right
+
   }
-  else if(yon.startsWith("5")){ //stop
-     
+  else if (yon.startsWith("5")) { //stop
+
   }
-  
+
   server.send(200, "text/plain"); //Send web page
 }
 
@@ -323,68 +326,70 @@ void setup(void) {
   server.begin();
   Serial.println("HTTP server started");
 }
-/*
-void motor(bool cc) {
-  if (cc) {
+void motor(int cc) {
+  if (cc==4) {
     Serial.println("Girdim");
-    if(zaz==0){
+    /*
+      if(zaz==0){
       if (motors[0] < 1800) {
       don(0, 0);
       motors[0]++;
       cord[0] += 0.1;
       }else{ zaz++; motors[0] = 0;}
-    }if(zaz==1){
+      }if(zaz==1){
       if (motors[0] < 100) {
       don(1, 0);
       motors[0]++;
       cord[1] += 0.1;
       }else{ zaz++; motors[0] = 0;}
-    }
-    if(zaz==2){
+      }
+      if(zaz==2){
       if (motors[0] < 1800) {
       don(0, 1);
       motors[0]++;
       cord[0] -= 0.1;
       }else{ zaz++; motors[0] = 0;}
-    }
-    if(zaz==3){
+      }
+      if(zaz==3){
       if (motors[0] < 100) {
       don(1, 0);
       motors[0]++;
       cord[1] += 0.1;
       }else{ zaz=0; motors[0] = 0; aad++;}
-    }
-    
-/*
-    if (motors[0] < 1800) {
-      don(0, zaz);
-      motors[0]++;
-    } else {
-      if (motors[1] < 1800) {
-        don(1, 0);
-        motors[1]++;
-      }else if (motors[0] < 3600){
-        don(0, zaz);
-        motors[0]++;
-      }else{
-        motors[0]=0;
-        motors[1]=0;
-        zaz = !zaz;
       }
-    }
+    */
+
+    /*
+        if (motors[0] < 1800) {
+          don(0, zaz);
+          motors[0]++;
+        } else {
+          if (motors[1] < 1800) {
+            don(1, 0);
+            motors[1]++;
+          }else if (motors[0] < 3600){
+            don(0, zaz);
+            motors[0]++;
+          }else{
+            motors[0]=0;
+            motors[1]=0;
+            zaz = !zaz;
+          }
+        }
+      }
+    */
   }
-  }}
-  */
+}
 
 
-  void don(bool mot, bool yon,int mspeed) {
-    digitalWrite(Dir[mot], yon); //Rotate stepper motor in clock wise direction
-    digitalWrite(Step[mot], HIGH);
-    delay(mspeed);
-    digitalWrite(Step[mot], LOW);
-    delay(mspeed);
-  }
-  void loop(void) {
-    server.handleClient();
-//    motor(sys);
-  }
+void don(bool mot, bool yon, int mspeed) {
+  digitalWrite(Dir[mot], yon); //Rotate stepper motor in clock wise direction
+  digitalWrite(Step[mot], HIGH);
+  delay(mspeed);
+  digitalWrite(Step[mot], LOW);
+  delay(mspeed);
+}
+void loop(void) {
+  server.handleClient();
+  motor(sys);
+}
