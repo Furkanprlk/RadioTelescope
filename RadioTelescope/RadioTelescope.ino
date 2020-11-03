@@ -63,9 +63,9 @@ void homme() {
   message += "<progress id=\"file\" max=\"100\" value=\"";
   message += aad;
   message += "\"></progress>";
+  message += "<p style=\"color: #fd7878\">X=" + String(cord[0]) + " - Y=" + String(cord[1]) + "</p>";
   message += "<br><br><label id=\"starrt\" style=\"color: #878787\";>System Start:</label>";
   message += "<button onclick=\"starrt()\">Start</button>";
-  message += "<p>X=" + String(cord[0]) + " - Y=" + String(cord[1]) + "</p>";
   message += "</body>";
   message += "</html>";
   Serial.print("HOME ");
@@ -77,38 +77,6 @@ void starrt() {
   else if (sys == 5)
     sys = 4;
   Serial.print("Start ");
-}
-void left() {
-  Serial.print("left ");
-  for (int i = 0; i < 100; i++) {
-    don(0, 1, 2);
-    motors[0]++;
-    cord[0] -= 0.1;
-  }
-}
-void leftt() {
-  Serial.print("leftt ");
-  for (int i = 0; i < 600; i++) {
-    don(0, 1, 2);
-    motors[0]++;
-    cord[0] -= 0.1;
-  }
-}
-void right() {
-  Serial.print("right ");
-  for (int i = 0; i < 100; i++) {
-    don(0, 0, 2);
-    motors[0]++;
-    cord[0] -= 0.1;
-  }
-}
-void rightt() {
-  Serial.print("rightt ");
-  for (int i = 0; i < 600; i++) {
-    don(0, 0, 2);
-    motors[0]++;
-    cord[0] -= 0.1;
-  }
 }
 
 void moveMotors()
@@ -303,10 +271,6 @@ void setup(void) {
   server.on("/Save", systemSave);
   server.on("/sReset", sysReset);
   server.on("/starrt", starrt);
-  server.on("/right", right);
-  server.on("/rightt", rightt);
-  server.on("/left", left);
-  server.on("/leftt", leftt);
   server.on("/moveMotors", moveMotors);
 
   scan();

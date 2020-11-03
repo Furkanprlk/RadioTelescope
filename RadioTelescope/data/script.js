@@ -72,7 +72,7 @@ function starrt() {
     }
   };
   //xhttp.open("GET", "/starrt", true);
-  xhttp.open("GET", "moveMotors?yon=4&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.open("GET", "moveMotors?yon=4&hiz=" + ((30 - document.getElementById('hiz2').value) + 2), true);
   xhttp.send();
 }
 
