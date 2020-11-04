@@ -64,20 +64,14 @@ void homme() {
   message += aad;
   message += "\"></progress>";
   message += "<p style=\"color: #fd7878\">X=" + String(cord[0]) + " - Y=" + String(cord[1]) + "</p>";
-  message += "<br><br><label id=\"starrt\" style=\"color: #878787\";>System Start:</label>";
-  message += "<button onclick=\"starrt()\">Start</button>";
+  //message += "<br><br><label id=\"starrt\" style=\"color: #878787\";>System Start:</label>";
+  //message += "<button onclick=\"starrt()\">Start</button>";
   message += "</body>";
   message += "</html>";
   Serial.print("HOME ");
   server.send(200, "text/html", message);
 }
-void starrt() {
-  if (sys == 4)
-    sys = 5;
-  else if (sys == 5)
-    sys = 4;
-  Serial.print("Start ");
-}
+
 
 void moveMotors()
 {
@@ -96,6 +90,12 @@ void moveMotors()
   }
   else if (yon.startsWith("3")) { //right
 
+  }
+  else if (yon.startsWith("4")) { //automathic
+    if (sys == 4)
+      sys = 5;
+    else if (sys == 5)
+      sys = 4;
   }
   else if (yon.startsWith("5")) { //stop
 
@@ -270,7 +270,7 @@ void setup(void) {
   server.on("/data.json", datajson);
   server.on("/Save", systemSave);
   server.on("/sReset", sysReset);
-  server.on("/starrt", starrt);
+//  server.on("/starrt", starrt);
   server.on("/moveMotors", moveMotors);
 
   scan();
@@ -291,7 +291,7 @@ void setup(void) {
   Serial.println("HTTP server started");
 }
 void motor(int cc) {
-  if (cc==4) {
+  if (cc == 4) {
     Serial.println("Girdim");
     /*
       if(zaz==0){
@@ -355,5 +355,5 @@ void don(bool mot, bool yon, int mspeed) {
 }
 void loop(void) {
   server.handleClient();
-  motor(sys);
+  //motor(sys);
 }
