@@ -72,7 +72,7 @@ function starrt() {
     }
   };
   //xhttp.open("GET", "/starrt", true);
-  xhttp.open("GET", "moveMotors?yon=4&hiz=" + ((30 - document.getElementById('hiz2').value) + 2), true);
+  xhttp.open("GET", "moveMotors?yon=4&hiz=" + ((100 - document.getElementById('hiz2').value) + 2), true);
   xhttp.send();
 }
 
@@ -82,7 +82,7 @@ $('#up').mousedown(function () {
     if (this.readyState == 4 && this.status == 200) {
     }
   };
-  xhttp.open("GET", "moveMotors?yon=0&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.open("GET", "moveMotors?yon=0&hiz=" + ((100 - document.getElementById('hiz').value) + 2), true);
   xhttp.send();
 });
 
@@ -92,7 +92,7 @@ $('#down').mousedown(function () {
     if (this.readyState == 4 && this.status == 200) {
     }
   };
-  xhttp.open("GET", "moveMotors?yon=1&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.open("GET", "moveMotors?yon=1&hiz=" + ((100 - document.getElementById('hiz').value) + 2), true);
   xhttp.send();
 });
 
@@ -102,7 +102,7 @@ $('#left').mousedown(function () {
     if (this.readyState == 4 && this.status == 200) {
     }
   };
-  xhttp.open("GET", "moveMotors?yon=2&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.open("GET", "moveMotors?yon=2&hiz=" + ((100 - document.getElementById('hiz').value) + 2), true);
   xhttp.send();
 });
 
@@ -112,7 +112,7 @@ $('#right').mousedown(function () {
     if (this.readyState == 4 && this.status == 200) {
     }
   };
-  xhttp.open("GET", "moveMotors?yon=3&hiz=" + ((30 - document.getElementById('hiz').value) + 2), true);
+  xhttp.open("GET", "moveMotors?yon=3&hiz=" + ((100 - document.getElementById('hiz').value) + 2), true);
   xhttp.send();
 });
 

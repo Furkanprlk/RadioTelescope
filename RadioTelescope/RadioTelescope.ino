@@ -49,6 +49,8 @@ int motors[2] = {0, 0};         //Kullanılıyor
 bool directions[2] = {0, 0};    //Kullanılıyor
 int zaz = 0;                    //Kullanılıyor
 float cord[2] = {0, 0};         //Kullanılıyor
+String hiz;
+String yon;
 
 int Step[2] = {0, 5}; //GPIO0---D3 of Nodemcu--Step of stepper motor driver
 int Dir[2]  = {2, 4}; //GPIO2---D4 of Nodemcu--Direction of stepper motor driver
@@ -75,21 +77,20 @@ void homme() {
 
 void moveMotors()
 {
-  String yon = server.arg("yon");
-  String hiz = server.arg("hiz");
+  yon = server.arg("yon");
+  hiz = server.arg("hiz");
 
   Serial.println(yon + ' ' + hiz);
 
   if (yon.startsWith("0")) { //up
-
+    sys=0;
   } else if (yon.startsWith("1")) { //down
-
+    sys=1;
   }
   else if (yon.startsWith("2")) { //left
-
-  }
-  else if (yon.startsWith("3")) { //right
-
+    sys=2;
+  }else if (yon.startsWith("3")) { //right
+    sys=3;
   }
   else if (yon.startsWith("4")) { //automathic
     if (sys == 4)
@@ -98,7 +99,7 @@ void moveMotors()
       sys = 4;
   }
   else if (yon.startsWith("5")) { //stop
-
+    sys=5;
   }
 
   server.send(200, "text/plain"); //Send web page
@@ -291,57 +292,21 @@ void setup(void) {
   Serial.println("HTTP server started");
 }
 void motor(int cc) {
-  if (cc == 4) {
-    Serial.println("Girdim");
-    /*
-      if(zaz==0){
-      if (motors[0] < 1800) {
-      don(0, 0);
-      motors[0]++;
-      cord[0] += 0.1;
-      }else{ zaz++; motors[0] = 0;}
-      }if(zaz==1){
-      if (motors[0] < 100) {
-      don(1, 0);
-      motors[0]++;
-      cord[1] += 0.1;
-      }else{ zaz++; motors[0] = 0;}
-      }
-      if(zaz==2){
-      if (motors[0] < 1800) {
-      don(0, 1);
-      motors[0]++;
-      cord[0] -= 0.1;
-      }else{ zaz++; motors[0] = 0;}
-      }
-      if(zaz==3){
-      if (motors[0] < 100) {
-      don(1, 0);
-      motors[0]++;
-      cord[1] += 0.1;
-      }else{ zaz=0; motors[0] = 0; aad++;}
-      }
-    */
-
-    /*
-        if (motors[0] < 1800) {
-          don(0, zaz);
-          motors[0]++;
-        } else {
-          if (motors[1] < 1800) {
-            don(1, 0);
-            motors[1]++;
-          }else if (motors[0] < 3600){
-            don(0, zaz);
-            motors[0]++;
-          }else{
-            motors[0]=0;
-            motors[1]=0;
-            zaz = !zaz;
-          }
-        }
-      }
-    */
+ // stringstream degree(sayyi);
+  if (cc == 0) {                    //UP
+    don(1, 1, hiz.toInt());
+    Serial.println("UP");
+  }else if (cc == 1) {              //DOWN
+    don(1, 0, hiz.toInt());
+    Serial.println("DOWN");
+  }else if (cc == 2) {              //LEFT
+    don(0, 1, hiz.toInt());
+    Serial.println("LEFT");
+  }else if (cc == 3) {              //RIGHT
+    don(0, 0, hiz.toInt());
+    Serial.println("RIGHT");
+  }else if (cc == 4) {              //AUTOMATIC
+    Serial.println("AUTOMATIC");
   }
 }
 
@@ -355,5 +320,5 @@ void don(bool mot, bool yon, int mspeed) {
 }
 void loop(void) {
   server.handleClient();
-  //motor(sys);
+  motor(sys);
 }
