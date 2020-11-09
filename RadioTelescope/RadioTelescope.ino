@@ -245,11 +245,11 @@ void sistemGiris() {
   Serial.println(xmode);
   if(deBug[0]==2)
     Serial.println("Sistemden Hic Veri Cekilemedi");
-  if (!xmode) wifiStarting(0, APssid, APpassword, ip);
-  else if (!wifiStarting(1, tempssid, temppassword, ip, 10))
-    if (!wifiStarting(1, ssid, password, ip, 10))
+  if (!xmode){ wifiStarting(0, APssid, APpassword, ip);
+  }else if (!wifiStarting(1, tempssid, temppassword, ip, 10)){
+    if (!wifiStarting(1, ssid, password, ip, 10)){
       wifiStarting(0, APssid, APpassword, ip);
-}
+}}}
 void sysReset() {
   server.sendHeader("Location", "/index.html");
   server.send(301);
