@@ -30,7 +30,7 @@
 
 #include "ESP8266Essentials.h"
 
-const char* ssid = "Furkan Parlak";  // Enter SSID here
+const char* ssid = "Furkan Parlak-";  // Enter SSID here
 const char* password = "RV7CUUPTJTFC";  //Enter Password here
 
 const char* tempssid;
@@ -43,7 +43,7 @@ IPAddress ip(192, 168, 1, 220);
 
 
 int aad = 0;                    //Kullanılıyor
-int xmode = 1;                  //Kullanılıyor
+int xmode = 0;                  //Kullanılıyor
 int sys = 5;                   //Kullanılıyor
 int motors[2] = {0, 0};         //Kullanılıyor
 bool directions[2] = {0, 0};    //Kullanılıyor
@@ -51,6 +51,7 @@ int zaz = 0;                    //Kullanılıyor
 float cord[2] = {0, 0};         //Kullanılıyor
 String hiz;
 String yon;
+int deBug[6]= {0, 0, 0, 0, 0, 0};
 
 int Step[2] = {0, 5}; //GPIO0---D3 of Nodemcu--Step of stepper motor driver
 int Dir[2]  = {2, 4}; //GPIO2---D4 of Nodemcu--Direction of stepper motor driver
@@ -83,14 +84,14 @@ void moveMotors()
   Serial.println(yon + ' ' + hiz);
 
   if (yon.startsWith("0")) { //up
-    sys=0;
+    sys = 0;
   } else if (yon.startsWith("1")) { //down
-    sys=1;
+    sys = 1;
   }
   else if (yon.startsWith("2")) { //left
-    sys=2;
-  }else if (yon.startsWith("3")) { //right
-    sys=3;
+    sys = 2;
+  } else if (yon.startsWith("3")) { //right
+    sys = 3;
   }
   else if (yon.startsWith("4")) { //automathic
     if (sys == 4)
@@ -99,7 +100,7 @@ void moveMotors()
       sys = 4;
   }
   else if (yon.startsWith("5")) { //stop
-    sys=5;
+    sys = 5;
   }
 
   server.send(200, "text/plain"); //Send web page
@@ -201,7 +202,9 @@ void sistemGiris() {
   File file = SPIFFS.open("/ssid.txt", "r");
   if (!file) {
     Serial.println("ssid.txt açılamadı");
+    deBug[0]++;
   } else {
+    Serial.println("ssid.txt açıldı");
     s1 = file.readStringUntil('|');
     s2 = file.readStringUntil('|');
     xmode = ((int)file.read()) - 48;
@@ -214,7 +217,9 @@ void sistemGiris() {
   File tfile = SPIFFS.open("/tempssid.txt", "r");
   if (!tfile) {
     Serial.println("tempssid.txt açılamadı");
+    deBug[0]++;
   } else {
+    Serial.println("tempssid.txt açıldı");
     s1 = tfile.readStringUntil('|');
     s2 = tfile.readStringUntil('|');
     xmode = ((int)tfile.read()) - 48;
@@ -223,15 +228,23 @@ void sistemGiris() {
     temppassword = (char*)s2.c_str();
   }
   tfile.close();
-
-  Serial.println();
-  Serial.print("RSSID= ");
+  Serial.println("Buraya Gelmesi Lazim Eger Gelmezse Sikinti");
+  Serial.println("====[ New SSID ]====");
+  Serial.print("NSSID= ");
   Serial.println(ssid);
-  Serial.print("RPassword= ");
+  Serial.print("NPassword= ");
   Serial.println(password);
-  Serial.print("Rmode= ");
+  Serial.print("Nmode= ");
   Serial.println(xmode);
-
+  Serial.println("====[ Temp SSID ]====");
+  Serial.print("TSSID= ");
+  Serial.println(tempssid);
+  Serial.print("TPassword= ");
+  Serial.println(temppassword);
+  Serial.print("Tmode= ");
+  Serial.println(xmode);
+  if(deBug[0]==2)
+    Serial.println("Sistemden Hic Veri Cekilemedi");
   if (!xmode) wifiStarting(0, APssid, APpassword, ip);
   else if (!wifiStarting(1, tempssid, temppassword, ip, 10))
     if (!wifiStarting(1, ssid, password, ip, 10))
@@ -271,7 +284,7 @@ void setup(void) {
   server.on("/data.json", datajson);
   server.on("/Save", systemSave);
   server.on("/sReset", sysReset);
-//  server.on("/starrt", starrt);
+  //  server.on("/starrt", starrt);
   server.on("/moveMotors", moveMotors);
 
   scan();
@@ -292,20 +305,20 @@ void setup(void) {
   Serial.println("HTTP server started");
 }
 void motor(int cc) {
- // stringstream degree(sayyi);
+  // stringstream degree(sayyi);
   if (cc == 0) {                    //UP
     don(1, 1, hiz.toInt());
     Serial.println("UP");
-  }else if (cc == 1) {              //DOWN
+  } else if (cc == 1) {              //DOWN
     don(1, 0, hiz.toInt());
     Serial.println("DOWN");
-  }else if (cc == 2) {              //LEFT
+  } else if (cc == 2) {              //LEFT
     don(0, 1, hiz.toInt());
     Serial.println("LEFT");
-  }else if (cc == 3) {              //RIGHT
+  } else if (cc == 3) {              //RIGHT
     don(0, 0, hiz.toInt());
     Serial.println("RIGHT");
-  }else if (cc == 4) {              //AUTOMATIC
+  } else if (cc == 4) {              //AUTOMATIC
     Serial.println("AUTOMATIC");
   }
 }
