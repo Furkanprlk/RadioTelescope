@@ -25,13 +25,14 @@
 
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
+#include <ESP8266mDNS.h>
 #include <ArduinoJson.h>
 #include <FS.h>
 
 #include "ESP8266Essentials.h"
 
-const char* ssid = "Furkan Parlak";  // Enter SSID here
-const char* password = "RV7CUUPTJTFC";  //Enter Password here
+const char* ssid = "Lokum";  // Enter SSID here
+const char* password = "42Ajk0053";  //Enter Password here
 
 const char* tempssid;
 const char* temppassword;
@@ -39,7 +40,7 @@ const char* temppassword;
 const char* APssid = "NeTracker";  // Enter SSID here
 const char* APpassword = "1234567890";
 
-IPAddress ip(192, 168, 1, 220);
+//IPAddress ip(192, 168, 1, 220);
 
 
 int aad = 0;                    //Kullanılıyor
@@ -246,10 +247,10 @@ void sistemGiris() {
   if (deBug[0] == 2)
     Serial.println("Sistemden Hic Veri Cekilemedi");
   if (!xmode) {
-    wifiStarting(0, APssid, APpassword, ip);
-  } else if (!wifiStarting(1, tempssid, temppassword, ip, 10)) {
-    if (!wifiStarting(1, ssid, password, ip, 10)) {
-      wifiStarting(0, APssid, APpassword, ip);
+    wifiStarting(0, APssid, APpassword, APssid, APpassword);
+  } else if (!wifiStarting(1, tempssid, temppassword, 10)) {
+    if (!wifiStarting(1, ssid, password, 10)) {
+      wifiStarting(0, APssid, APpassword, APssid, APpassword);
     }
   }
 }
@@ -262,6 +263,7 @@ void sysReset() {
 void setup(void) {
   Serial.begin(115200);
   SPIFFS.begin();
+  WiFi.hostname("netracker");
   sistemGiris();
 
   //readJSON("/ssid.txt");
@@ -281,6 +283,9 @@ void setup(void) {
   pinMode(Dir[1],  OUTPUT); //Direcction pin as output
   digitalWrite(Step[1], LOW); // Currently no stepper motor movement
   digitalWrite(Dir[1], LOW);
+
+  if(MDNS.begin("netracker"))
+    Serial.println("mDNS Responder Started!");
 
   server.on("/home", homme);
   server.on("/data.json", datajson);
@@ -305,6 +310,8 @@ void setup(void) {
 
   server.begin();
   Serial.println("HTTP server started");
+
+  MDNS.addService("http", "tcp", 80);
 }
 void motor(int cc) {
   // stringstream degree(sayyi);
@@ -336,4 +343,5 @@ void don(bool mot, bool yon, int mspeed) {
 void loop(void) {
   server.handleClient();
   motor(sys);
+  MDNS.update();
 }

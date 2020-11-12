@@ -46,6 +46,16 @@ bool wifiStarting (bool Mode, const char* ssid, const char* password, IPAddress 
       return true;
 }
 
+void wifiStarting (bool Mode, const char* ssid, const char* password, const char* APssid, const char* APpassword) {
+
+  if (Mode == 0) { //First Connection Mode ( Only AP Mode )
+    apMode(APssid, APpassword);
+  } else if (Mode == 1) { //Standard Mode
+    if (staMode(ssid, password) > 10)
+      apMode(APssid, APpassword);
+  }
+}
+
 void wifiStarting (bool Mode, const char* ssid, const char* password, const char* APssid, const char* APpassword, IPAddress ip) {
   WiFi.config(ip, gateway, subnet);
   WiFi.softAPConfig(ip, gateway, subnet);
