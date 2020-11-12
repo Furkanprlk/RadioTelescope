@@ -34,7 +34,7 @@ int staMode(const char* ssid, const char* password) {
   return wifiTime;
 }
 
-bool wifiStarting (int Mode, const char* ssid, const char* password, IPAddress ip, int timeout=10) {
+bool wifiStarting (bool Mode, const char* ssid, const char* password, IPAddress ip, int timeout=10) {
   WiFi.config(ip, gateway, subnet);
   WiFi.softAPConfig(ip, gateway, subnet);
   if (Mode == 0) //First Connection Mode ( Only AP Mode )
@@ -46,7 +46,7 @@ bool wifiStarting (int Mode, const char* ssid, const char* password, IPAddress i
       return true;
 }
 
-void wifiStarting (int Mode, const char* ssid, const char* password, const char* APssid, const char* APpassword, IPAddress ip) {
+void wifiStarting (bool Mode, const char* ssid, const char* password, const char* APssid, const char* APpassword, IPAddress ip) {
   WiFi.config(ip, gateway, subnet);
   WiFi.softAPConfig(ip, gateway, subnet);
 
@@ -57,7 +57,7 @@ void wifiStarting (int Mode, const char* ssid, const char* password, const char*
       apMode(APssid, APpassword);
   }
 }
-void wifiStarting (int Mode, const char* ssid, const char* password, const char* APssid, const char* APpassword, IPAddress ip, const char* tempssid, const char* temppassword) {
+void wifiStarting (bool Mode, const char* ssid, const char* password, const char* APssid, const char* APpassword, IPAddress ip, const char* tempssid, const char* temppassword) {
   WiFi.config(ip, gateway, subnet);
   WiFi.softAPConfig(ip, gateway, subnet);
 

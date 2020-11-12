@@ -30,7 +30,7 @@
 
 #include "ESP8266Essentials.h"
 
-const char* ssid = "Furkan Parlak-";  // Enter SSID here
+const char* ssid = "Furkan Parlak";  // Enter SSID here
 const char* password = "RV7CUUPTJTFC";  //Enter Password here
 
 const char* tempssid;
@@ -51,7 +51,7 @@ int zaz = 0;                    //Kullanılıyor
 float cord[2] = {0, 0};         //Kullanılıyor
 String hiz;
 String yon;
-int deBug[6]= {0, 0, 0, 0, 0, 0};
+int deBug[6] = {0, 0, 0, 0, 0, 0};
 
 int Step[2] = {0, 5}; //GPIO0---D3 of Nodemcu--Step of stepper motor driver
 int Dir[2]  = {2, 4}; //GPIO2---D4 of Nodemcu--Direction of stepper motor driver
@@ -243,13 +243,16 @@ void sistemGiris() {
   Serial.println(temppassword);
   Serial.print("Tmode= ");
   Serial.println(xmode);
-  if(deBug[0]==2)
+  if (deBug[0] == 2)
     Serial.println("Sistemden Hic Veri Cekilemedi");
-  if (!xmode){ wifiStarting(0, APssid, APpassword, ip);
-  }else if (!wifiStarting(1, tempssid, temppassword, ip, 10)){
-    if (!wifiStarting(1, ssid, password, ip, 10)){
+  if (!xmode) {
+    wifiStarting(0, APssid, APpassword, ip);
+  } else if (!wifiStarting(1, tempssid, temppassword, ip, 10)) {
+    if (!wifiStarting(1, ssid, password, ip, 10)) {
       wifiStarting(0, APssid, APpassword, ip);
-}}}
+    }
+  }
+}
 void sysReset() {
   server.sendHeader("Location", "/index.html");
   server.send(301);
@@ -267,8 +270,7 @@ void setup(void) {
 
 
   Serial.println("");
-  Serial.print("Connected to ");
-  Serial.println(ssid);
+
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
   pinMode(Step[0], OUTPUT); //Step pin as output
