@@ -4,9 +4,10 @@ Radio telescopes are built in all shapes and sizes based on the kind of radio wa
 # TasmoAdmin
 ![Logo](https://github.com/Furkanprlk/RadioTelescope/blob/master/RadioTelescope/data/netracker.ico)
 
-[![GitHub release](https://img.shields.io/github/go-mod/go-version/Furkanprlk/RadioTelescope)](https://GitHub.com/Furkanprlk/RadioTelescope/releases/) 
-[![Build Status](https://travis-ci.org/reloxx13/TasmoAdmin.svg?branch=master)](https://travis-ci.org/reloxx13/TasmoAdmin) 
+[![GitHub followers](https://img.shields.io/github/followers/Furkanprlk?style=social)](https://github.com/Furkanprlk) 
+[![GitHub all releases](https://img.shields.io/github/downloads/Furkanprlk/RadioTelescope/total)](https://travis-ci.org/reloxx13/TasmoAdmin) 
 [![GitHub contributors](https://img.shields.io/github/contributors/reloxx13/TasmoAdmin.svg)](https://GitHub.com/reloxx13/TasmoAdmin/graphs/contributors/) 
+
 
 [![HitCount](http://hits.dwyl.io/reloxx13/TasmoAdmin.svg)](http://hits.dwyl.io/reloxx13/TasmoAdmin)
 [![GitHub stars](https://img.shields.io/github/stars/reloxx13/TasmoAdmin.svg)](https://github.com/reloxx13/TasmoAdmin/stargazers)
