@@ -37,11 +37,10 @@ Radio telescopes are built in all shapes and sizes based on the kind of radio wa
 ### Windows
 A ready to use RadioTelescope.zip is available on the [release page](https://github.com/Furkanprlk/RadioTelescope/releases/) and is based on HTML.
 
-1. Download the XAMPP Zip package from the releases page
-2. Extract the Zip (recommend to put the xamp folder on C:\
-3. Run once the xamp\setup_xampp.bat
-4. Start xampp-control.exe
-5. Start Apache in the opened ControlCenter
+1. Download the RadioTelescope Zip package from the releases page
+2. Extract the Zip
+3. Coming Soon...
 6. Get your local IP Address
+7. Have FUN!
 
-Now you can type in your browser http://YOURLOCALIP and TasmoAdmin shows up.
+Now you can type in your browser http://LOCALIP and RadioTelescope shows up.
