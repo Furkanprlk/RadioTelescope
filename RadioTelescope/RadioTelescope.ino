@@ -31,8 +31,8 @@
 
 #include "ESP8266Essentials.h"
 
-const char* ssid = "Lokum";  // Enter SSID here
-const char* password = "42Ajk0053";  //Enter Password here
+const char* ssid = "Furkan Parlak";  // Enter SSID here
+const char* password = "RV7CUUPTJTFC";  //Enter Password here
 
 const char* tempssid;
 const char* temppassword;
