@@ -7,28 +7,14 @@ Radio telescopes are built in all shapes and sizes based on the kind of radio wa
 [![GitHub followers](https://img.shields.io/github/followers/Furkanprlk?style=social)](https://github.com/Furkanprlk) 
 
 
-## Features
-* Login protected
-* Multi Update Process
-  * Select devices to update
-  * Automatic Modus downloads latest firmware bin from Tasmota GitHub
-* Show device information
-* Mobile Responsive (Bootstrap4)
-  * SCSS & Minified
-* Config devices
-* SelfUpdate function for TasmoAdmin (disabled for Docker)
-* NightMode (Enable/Disable/Auto) in settings
-* AutoScan to find Tasmota Devices
-* Support for multiple sensors
-* Send Command to selected Devices
-* Chat (beta)
+## Features (Coming Soon)
+* ---------
+    * --------
 
 ### Supported Platforms
-* Apache2 and nginx
-* XAMPP on Windows
-* Docker by @RaymondMouthaan
-  * unRaid by @digiblur
-* IOCage (FreeNAS) by @tprelog
+* Chrome Web Browser
+* Opera Web Browser
+* Edge Web Browser
 
 
 
