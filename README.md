@@ -1,5 +1,5 @@
 # RadioTelescope
-Radio telescopes are built in all shapes and sizes based on the kind of radio waves they pick up. However, every radio telescope has an antenna on a mount and at least one piece of receiver equipment to detect the signals.
+Radio telescopes are built in all shapes and sizes based on the kind of radio waves they pick up. However, every radio telescope has an antenna mounted on and at least one piece of receiver equipment to detect the signals.
 
 ![Logo](https://github.com/Furkanprlk/RadioTelescope/blob/master/RadioTelescope/data/netracker.ico)
 
@@ -28,4 +28,4 @@ A ready to use RadioTelescope.zip is available on the [release page](https://git
 6. Get your local IP Address
 7. Have FUN!
 
-Now you can type in your browser http://LOCALIP and RadioTelescope shows up.
+Now you can type http://LOCALIP in your browser and RadioTelescope shows up.
