@@ -1,4 +1,9 @@
-![Logo](https://github.com/Furkanprlk/RadioTelescope/blob/master/RadioTelescope/data/netracker.ico)
+<div align="center">
+	<a href="https://github.com/Furkanprlk/RadioTelescope">
+		<img src="./RadioTelescope/data/netracker.ico" width="200" height="200">
+	</a>
+</div>
+
 # RadioTelescope
 Radio telescopes are built in all shapes and sizes based on the kind of radio waves they pick up. However, every radio telescope has an antenna mounted on and at least one piece of receiver equipment to detect the signals.
 
