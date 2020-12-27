@@ -7,20 +7,27 @@ Radio telescopes are built in all shapes and sizes based on the kind of radio wa
 
 
 ## Features (Coming Soon)
-* ---------
+* Configured through Web Interface
     * --------
 
 ### Supported Platforms
 * Chrome Web Browser
 * Opera Web Browser
 * Edge Web Browser
+* Mobile Web Browser
 
 
 
 ## Installation
 
-### Windows
-A ready to use RadioTelescope.zip is available on the [release page](https://github.com/Furkanprlk/RadioTelescope/releases/) and is based on HTML.
+### Arduino IDE
+A ready to use Marquee-Sign.zip is available on the [release page](https://github.com/Furkanprlk/Marquee-Sign/) and is based on HTML.
+
+#### Requirements
+* Install the [Arduino plugin for uploading files to ESP8266 file system](https://github.com/esp8266/arduino-esp8266fs-plugin).
+* Install the library "ArduinoJson" (available from the library manager).
+
+
 
 1. Download the RadioTelescope Zip package from the releases page
 2. Extract the Zip
