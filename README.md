@@ -8,12 +8,12 @@
 Radio telescopes are built in all shapes and sizes based on the kind of radio waves they pick up. However, every radio telescope has an antenna mounted on and at least one piece of receiver equipment to detect the signals.
 
 
-[![GitHub followers](https://img.shields.io/github/followers/Furkanprlk?style=social)](https://github.com/Furkanprlk) <br>
-![](https://img.shields.io/github/forks/Furkanprlk/RadioTelescope.svg)<br>
-![](https://img.shields.io/github/stars/Furkanprlk/RadioTelescope.svg)<br>
-![](https://img.shields.io/github/tag/Furkanprlk/RadioTelescope.svg)<br>
-![](https://img.shields.io/github/release/Furkanprlk/RadioTelescope.svg)<br>
-![](https://img.shields.io/github/issues/Furkanprlk/RadioTelescope.svg)<br>
+[![GitHub followers](https://img.shields.io/github/followers/Furkanprlk?style=social)](https://github.com/Furkanprlk) &#9;
+![](https://img.shields.io/github/forks/Furkanprlk/RadioTelescope.svg)&#9;
+![](https://img.shields.io/github/stars/Furkanprlk/RadioTelescope.svg)&#9;
+![](https://img.shields.io/github/tag/Furkanprlk/RadioTelescope.svg)&#9;
+![](https://img.shields.io/github/release/Furkanprlk/RadioTelescope.svg)&#9;
+![](https://img.shields.io/github/issues/Furkanprlk/RadioTelescope.svg)&#9;
 
 
 ## Features (Coming Soon)
