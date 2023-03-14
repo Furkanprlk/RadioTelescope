@@ -27,7 +27,7 @@ Radio telescopes are built in all shapes and sizes based on the kind of radio wa
 * Mobile Web Browser
 
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://www.youtube.com/shorts/yQ-8DDZNZeI)
+[![Watch the video](https://i.hizliresim.com/1za81q3.png)](https://www.youtube.com/shorts/yQ-8DDZNZeI)
 
 ## Installation
 
